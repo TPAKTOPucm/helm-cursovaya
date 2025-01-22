@@ -4,6 +4,7 @@ metadata:
   name: {{ .Release.Name }}-servicemonitor
   labels:
     app: {{ .Release.Name }}
+    {{- include "demo-app.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:

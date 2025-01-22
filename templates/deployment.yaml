@@ -11,12 +11,10 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}
-        app.kubernetes.io/name: {{ .Release.Name }}
-        helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/version: {{ .Chart.AppVersion }}
-        app.kubernetes.io/component: {{ .Values.componentName }}
+        {{- include "demo-app.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       annotations:
         {{ - toYaml . | nindent 8 }}
           {{ - end }}

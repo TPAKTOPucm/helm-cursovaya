@@ -2,6 +2,8 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}-hpa
+  labels:
+    {{- include "demo-app.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   scaleTargetRef:
